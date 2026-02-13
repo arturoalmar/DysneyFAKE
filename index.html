@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VeoCosas - Inicio</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Montserrat:wght@400;600;700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <header class="main-header">
+        <div class="header-container">
+            <div class="logo"><a href="index.html" style="text-decoration: none; color: inherit;">VeoCosas</a></div>
+            <nav class="main-nav">
+                <ul class="nav-list">
+                    <li><a href="#" class="nav-link active">Inicio</a></li>
+                    <li><a href="categorias.html" class="nav-link">Categorías</a></li>
+                    <li><a href="favoritos.html" class="nav-link">Favoritos</a></li>
+                </ul>
+            </nav>
+            <div class="search-container">
+                <button id="clearBtn" title="Borrar búsqueda">✕</button>
+                <input type="text" id="searchInput" placeholder="Buscar peli...">
+                <button id="searchBtn">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"
+                        stroke-linejoin="round" style="width: 20px; height: 20px;">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                </button>
+            </div>
+            <div class="user-profile" id="userProfile">
+                <div class="avatar" style="display: flex; align-items: center; gap: 10px;">
+                    <span id="userNameDisplay" style="font-size: 0.9rem; font-weight: 600; color: #e5e5e5;">Mi
+                        Cuenta</span>
+                    <img id="userAvatar"
+                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQXayQ6GHzZTBsE1twQYmvZtGF33757eePf8g&s"
+                        alt="Perfil">
+                </div>
+                <div class="user-dropdown" id="userDropdown">
+                    <button class="dropdown-item" id="editIconBtn">Editar Icono</button>
+                    <button class="dropdown-item" id="logoutBtn">Cerrar Sesión</button>
+                    <button class="dropdown-item delete" id="deleteAccountBtn">Eliminar Cuenta</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="hero-bg">
+                <img src="https://holocronstarwarsnoticiasdiarias.wordpress.com/wp-content/uploads/2021/09/sin-titulo-3.jpg"
+                    alt="Hero Background">
+                <div class="hero-overlay"></div>
+            </div>
+            <div class="hero-content">
+                <h1 class="hero-title">The Mandalorian</h1>
+                <div class="hero-meta"
+                    style="margin-bottom: 20px; font-family: 'Bangers', cursive; color: #ffde00; font-size: 1.2rem; letter-spacing: 1px;">
+                    2019 | 12+ | Ciencia Ficción</div>
+                <p class="hero-description">
+                    Tras la caída del Imperio, un guerrero solitario se abre paso por los confines de la galaxia, lejos
+                    de la autoridad de la Nueva República.
+                </p>
+                <div class="hero-buttons">
+                    <button class="btn btn-primary" id="heroPlayBtn">▶ REPRODUCIR</button>
+                    <button class="btn btn-secondary" id="heroAddListBtn">+ FAVORITOS</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Barra de Filtros -->
+        <div class="filter-bar">
+            <div class="category-filters" id="indexCategoryFilters">
+                <button class="cat-filter-btn active" data-target="all">Todas</button>
+                <button class="cat-filter-btn" data-target="originals-section">Originales</button>
+                <button class="cat-filter-btn" data-target="trending-section">Tendencias</button>
+                <button class="cat-filter-btn" data-target="recommended-section">Recomendados</button>
+            </div>
+            <div class="filter-container">
+                <button id="filterBtn" class="filter-btn">Filtrar por <span>▼</span></button>
+                <div id="filterDropdown" class="filter-dropdown">
+                    <button class="filter-option" data-sort="top-rated">Mejor valoradas</button>
+                    <button class="filter-option" data-sort="oldest">Más antiguos</button>
+                    <button class="filter-option" data-sort="newest">Más recientes</button>
+                    <button class="filter-option" data-sort="default">Por defecto (A-Z)</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Categories / Rows -->
+        <section class="content-rows" id="main-content-rows">
+            <!-- Resultados de Búsqueda -->
+            <div id="search-results-section" class="search-results-section" style="display: none;">
+                <h2 class="category-title">Resultados de la búsqueda</h2>
+                <div id="search-results-grid" class="search-results-grid"></div>
+            </div>
+
+            <!-- Originales VeoCosas -->
+            <div class="category-row" id="originals-section" style="display: none;">
+                <h2 class="category-title">Originales VeoCosas</h2>
+                <div class="carousel-container">
+                    <button class="carousel-btn prev" aria-label="Anterior">‹</button>
+                    <div class="movie-list" id="originals-list"></div>
+                    <button class="carousel-btn next" aria-label="Siguiente">›</button>
+                </div>
+            </div>
+
+            <!-- Tendencias -->
+            <div class="category-row" id="trending-section" style="display: none;">
+                <h2 class="category-title">Tendencias</h2>
+                <div class="carousel-container">
+                    <button class="carousel-btn prev" aria-label="Anterior">‹</button>
+                    <div class="movie-list" id="trending-list"></div>
+                    <button class="carousel-btn next" aria-label="Siguiente">›</button>
+                </div>
+            </div>
+
+            <!-- Recomendados -->
+            <div class="category-row" id="recommended-section" style="display: none;">
+                <h2 class="category-title">Recomendados para ti</h2>
+                <div class="carousel-container">
+                    <button class="carousel-btn prev" aria-label="Anterior">‹</button>
+                    <div class="movie-list" id="recommended-list"></div>
+                    <button class="carousel-btn next" aria-label="Siguiente">›</button>
+                </div>
+            </div>
+
+            <!-- Catálogo Completo -->
+            <div class="category-row" id="all-movies-section" style="display: none;">
+                <h2 class="category-title">Todas las Películas</h2>
+                <div class="carousel-container">
+                    <button class="carousel-btn prev" aria-label="Anterior">‹</button>
+                    <div class="movie-list" id="all-movies-list"></div>
+                    <button class="carousel-btn next" aria-label="Siguiente">›</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="main-footer">
+        <div class="footer-container">
+            <div class="footer-column">
+                <a href="index.html" class="footer-logo">VeoCosas</a>
+                <p class="footer-desc">Tu portal favorito para explorar el multiverso cinematográfico. Desde los
+                    clásicos
+                    hasta los últimos estrenos heroicos.</p>
+                <div class="social-icons">
+                    <a href="#" class="social-icon" aria-label="Facebook">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3V2z" />
+                        </svg>
+                    </a>
+                    <a href="#" class="social-icon" aria-label="Instagram">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                            <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"></path>
+                            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                        </svg>
+                    </a>
+                    <a href="#" class="social-icon" aria-label="Twitter">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path
+                                d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h3>Explorar</h3>
+                <ul class="footer-links">
+                    <li><a href="categorias.html">Acción</a></li>
+                    <li><a href="categorias.html">Ciencia Ficción</a></li>
+                    <li><a href="categorias.html">Comedia</a></li>
+                    <li><a href="categorias.html">Documentales</a></li>
+                    <li><a href="favoritos.html">Favoritos</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Soporte</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Centro de Ayuda</a></li>
+                    <li><a href="#">Dispositivos Compatibles</a></li>
+                    <li><a href="#">Cuenta</a></li>
+                    <li><a href="#">Suscripción</a></li>
+                    <li><a href="#">Contáctanos</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Legal</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Términos de Uso</a></li>
+                    <li><a href="#">Política de Privacidad</a></li>
+                    <li><a href="#">Cookies</a></li>
+                    <li><a href="#">Derechos de Autor</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 VeoCosas. Todos los derechos reservados.</p>
+            <div class="language-selector">
+                <span>🌐 Español (España)</span>
+            </div>
+        </div>
+    </footer>
+    <!-- Modal de Detalles -->
+    <div class="details-modal" id="movieModal">
+        <div class="modal-content">
+            <button class="modal-close" id="closeModal">&times;</button>
+            <div class="modal-body">
+                <div class="modal-poster-side">
+                    <img id="modalPoster" src="" alt="Póster de la película">
+                </div>
+                <div class="modal-info-side">
+                    <div class="modal-header">
+                        <h2 class="modal-title" id="modalTitle">Título de la Película</h2>
+                        <div class="modal-meta">
+                            <span class="meta-item" id="modalYear">Año</span>
+                            <span class="meta-item rating" id="modalRating">TP</span>
+                            <span class="meta-item score" id="modalScore">⭐ 0.0</span>
+                            <span class="meta-item" id="modalSaga">Saga</span>
+                            <span class="meta-item" id="modalProductora">Productora</span>
+                        </div>
+                    </div>
+                    <div class="modal-description" id="modalDescription">
+                        Resumen de la película aquí...
+                    </div>
+                    <div class="modal-footer" style="margin-top: 20px; text-align: center;">
+                        <button class="btn btn-primary" style="width: 100%;"
+                            onclick="alert('Esta función no está disponible en la versión de demostración.')">▶
+                            REPRODUCIR
+                            AHORA</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
